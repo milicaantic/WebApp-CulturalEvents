@@ -1,0 +1,14 @@
+﻿@model ProjekatWebKulturniDogadjaji.Models.Category
+
+<h2 class="text-center mb-4" style="color:#1B4D3E;">Izbriši kategoriju</h2>
+
+<div class="card shadow-sm mx-auto p-4" style="max-width: 500px; border-left: 4px solid #690B22;">
+    <h4>@Model.Name</h4>
+    <p>Da li ste sigurni da želite da izbrisete kategoriju?</p>
+
+    <form asp-action="Delete" method="post" class="text-center">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn text-white btn-lg me-2" style="background-color:#690B22; border-color:#690B22;">Izbriši</button>
+        <a asp-action="Index" class="btn btn-lg" style="background-color:#F1E3D3; color:#1B4D3E; border-color:#1B4D3E;">Odustani</a>
+    </form>
+</div>

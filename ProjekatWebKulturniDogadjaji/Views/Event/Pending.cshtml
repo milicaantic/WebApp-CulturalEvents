@@ -1,0 +1,49 @@
+﻿@model IEnumerable<ProjekatWebKulturniDogadjaji.Models.Event>
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ProjekatWebKulturniDogadjaji.Models.ApplicationUser> UserManager
+
+<div class="container py-4">
+    <h2 class="mb-4" style="color:#1B4D3E;">Odobravanje događaja</h2>
+    <div class="card shadow-sm mb-4">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0 align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Naslov</th>
+                            <th>Kategorija</th>
+                            <th>Kreator</th>
+                            <th>Datum</th>
+                            <th>Akcije</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var e in Model)
+                        {
+                            <tr>
+                                <td>@e.Title</td>
+                                <td>@e.Category?.Name</td>
+                                <td>@e.Creator?.UserName</td>
+                                <td>@(e.StartDate.ToString("dd.MM.yyyy HH:mm"))</td>
+                                <td>
+                                    <div class="d-flex gap-2">
+                                        <a class="btn btn-sm" asp-action="Details" asp-route-id="@e.Id" asp-controller="Event"
+                                           style="border:1px solid #1B4D3E; color:#1B4D3E;">Detalji</a>
+
+                                        <form asp-action="Approve" method="post" class="d-inline">
+                                            <input type="hidden" name="id" value="@e.Id" />
+                                            @Html.AntiForgeryToken()
+                                            
+                                                          <button type="submit" class="btn btn-sm" style="background-color: #1B4D3E; color:white;">Odobri</button>
+                                              
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+﻿@model ProjekatWebKulturniDogadjaji.Models.Event
+
+<div class="container py-4">
+    <div class="card shadow-sm mx-auto" style="max-width: 600px; border-left: 4px solid #690B22;">
+        <div class="card-body">
+            <h3 class="mb-3" style="color:#1B4D3E;">Obriši događaj</h3>
+
+            <div class="mb-3">
+                <h5 style="color:#690B22;">@Model.Title</h5>
+                <p>Da li ste sigurni da želite da obrišete događaj?</p>
+            </div>
+
+            <form asp-action="Delete" method="post" class="d-flex gap-2">
+                <input type="hidden" asp-for="Id" />
+                <button type="submit" class="btn text-white" style="background-color:#690B22; border-color:#690B22;">Obriši</button>
+                <a asp-action="Index" class="btn" style="background-color:#F1E3D3; color:#1B4D3E; border-color:#1B4D3E;">Odustani</a>
+            </form>
+        </div>
+    </div>
+</div>

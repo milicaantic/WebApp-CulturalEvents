@@ -1,0 +1,17 @@
+﻿# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build output
+bin/
+obj/
+
+# Rider/JetBrains
+.idea/
+
+# Node / Flutter / other
+node_modules/
+build/

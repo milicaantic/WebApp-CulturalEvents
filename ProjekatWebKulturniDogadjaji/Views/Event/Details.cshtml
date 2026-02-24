@@ -1,0 +1,144 @@
+﻿@model ProjekatWebKulturniDogadjaji.Models.Event
+@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+@inject SignInManager<ProjekatWebKulturniDogadjaji.Models.ApplicationUser> SignInManager
+@inject UserManager<ProjekatWebKulturniDogadjaji.Models.ApplicationUser> UserManager
+@{
+var currentUserId = SignInManager.IsSignedIn(User) ? User.FindFirstValue(ClaimTypes.NameIdentifier) : null;
+}
+
+<div class="container py-4">
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          
+            <h3 class="mb-1" style="color:#1B4D3E;">@Model.Title</h3>
+            <div class="mb-3 text-muted">
+                <small>@Model.Category?.Name • @Model.StartDate.ToString("dd.MM.yyyy HH:mm") • @Model.Location</small>
+            </div>
+
+            @{
+                var weather = ViewData["Weather"] as ProjekatWebKulturniDogadjaji.Services.WeatherInfo;
+            }
+
+            @if (weather != null)
+            {
+                <div class="weather-box">
+                    <p>Temperatura na mestu događaja: @weather.Temperature°C</p>
+                    <p>Opis vremena (engleski): @weather.Description</p>
+                </div>
+            }
+            else
+            {
+                <p>Trenutno nema podataka o vremenu.</p>
+            }
+            <p class="mb-3"><strong>Opis:</strong> @Model.Description</p>
+
+
+            <div class="mb-3"><strong>Average Rating:</strong> @Model.AverageRating.ToString("0.0")</div>
+
+            <hr />
+
+            
+            <h5 style="color:#1B4D3E;">Prijavljeni korisnici</h5>
+            @if (Model.EventRegistrations != null && Model.EventRegistrations.Any())
+            {
+                <ul class="list-group mb-3">
+                    @foreach (var reg in Model.EventRegistrations)
+                    {
+                        <li class="list-group-item d-flex justify-content-between align-items-center" style="border-left: 4px solid #690B22;">
+                            @(reg.User != null ? $"{reg.User.FullName} ({reg.User.Email})" : "Nepoznati korisnik")
+
+                            @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                            {
+                                <form asp-controller="Registration" asp-action="RemoveUser" method="post" class="ms-2">
+                                    <input type="hidden" name="eventId" value="@Model.Id" />
+                                    <input type="hidden" name="userId" value="@reg.UserId" />
+                                    <button type="submit" class="btn btn-sm btn-outline-danger"
+                                    >Obriši</button>
+                                </form>
+                            }
+                        </li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <p class="mb-3">Nema prijavljenih korisnika za ovaj događaj.</p>
+            }
+
+            @if (SignInManager.IsSignedIn(User))
+            {
+                
+                <div class="mb-4">
+                    @if (!Model.EventRegistrations.Any(r => r.UserId == currentUserId))
+                    {
+                        <form asp-controller="Registration" asp-action="Register" method="post" class="d-inline">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="eventId" value="@Model.Id" />
+                            <button type="submit" class="btn text-white" style="background-color:#690B22; border-color:#690B22;">Prijavi se</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <form asp-controller="Registration" asp-action="Unregister" method="post" class="d-inline">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="eventId" value="@Model.Id" />
+                            <button type="submit" class="btn text-white" style="background-color:#1B4D3E; border-color:#1B4D3E;">Odjavi se</button>
+                        </form>
+                    }
+                </div>
+            }
+
+            <hr />
+
+          
+            <h5 style="color:#1B4D3E;">Komentari</h5>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <form asp-controller="Comment" asp-action="Create" method="post" class="mb-3">
+                    <input type="hidden" name="eventId" value="@Model.Id" />
+                    <textarea name="content" class="form-control mb-2" required></textarea>
+                    <button type="submit" class="btn text-white" style="background-color:#690B22; border-color:#690B22;">Dodaj komentar</button>
+                </form>
+            }
+
+            <ul class="list-group mb-3">
+                @foreach (var comment in Model.Comments)
+                {
+                    <li class="list-group-item d-flex justify-content-between align-items-start" style="border-left: 4px solid #690B22;">
+                        <div>
+                            <strong style="color:#1B4D3E;">@comment.User?.FullName</strong>
+                            <div class="text-muted small">@comment.Content</div>
+                        </div>
+
+                        @if (SignInManager.IsSignedIn(User) && (User.IsInRole("Admin") || comment.UserId == currentUserId))
+                        {
+                            <form asp-controller="Comment" asp-action="DeleteConfirmed" method="post" class="ms-2">
+                                <input type="hidden" name="id" value="@comment.Id" />
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-sm btn-outline-danger">Obriši</button>
+                            </form>
+                        }
+                    </li>
+                }
+            </ul>
+
+           
+            <h5 style="color:#1B4D3E;">Oceni ovaj događaj</h5>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <form asp-controller="Rating" asp-action="Create" method="post" class="mb-3">
+                    <input type="hidden" name="eventId" value="@Model.Id" />
+                    <select name="score" class="form-select w-auto d-inline me-2">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                    <button type="submit" class="btn text-white" style="background-color:#690B22; border-color:#690B22;">Potvrdi ocenu</button>
+                </form>
+            }
+        </div>
+    </div>
+</div>
