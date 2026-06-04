@@ -23,15 +23,15 @@ var currentUserId = SignInManager.IsSignedIn(User) ? User.FindFirstValue(ClaimTy
             @if (weather != null)
             {
                 <div class="weather-box">
-                    <p>Temperatura na mestu događaja: @weather.Temperature°C</p>
-                    <p>Opis vremena (engleski): @weather.Description</p>
+                    <p>Temperature at the event location: @weather.Temperature°C</p>
+                    <p>Weather description: @weather.Description</p>
                 </div>
             }
             else
             {
-                <p>Trenutno nema podataka o vremenu.</p>
+                <p>Weather data is currently unavailable.</p>
             }
-            <p class="mb-3"><strong>Opis:</strong> @Model.Description</p>
+            <p class="mb-3"><strong>Description:</strong> @Model.Description</p>
 
 
             <div class="mb-3"><strong>Average Rating:</strong> @Model.AverageRating.ToString("0.0")</div>
@@ -39,14 +39,14 @@ var currentUserId = SignInManager.IsSignedIn(User) ? User.FindFirstValue(ClaimTy
             <hr />
 
             
-            <h5 style="color:#1B4D3E;">Prijavljeni korisnici</h5>
+            <h5 style="color:#1B4D3E;">Registered Users</h5>
             @if (Model.EventRegistrations != null && Model.EventRegistrations.Any())
             {
                 <ul class="list-group mb-3">
                     @foreach (var reg in Model.EventRegistrations)
                     {
                         <li class="list-group-item d-flex justify-content-between align-items-center" style="border-left: 4px solid #690B22;">
-                            @(reg.User != null ? $"{reg.User.FullName} ({reg.User.Email})" : "Nepoznati korisnik")
+                            @(reg.User != null ? $"{reg.User.FullName} ({reg.User.Email})" : "Unknown user")
 
                             @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                             {
@@ -54,7 +54,7 @@ var currentUserId = SignInManager.IsSignedIn(User) ? User.FindFirstValue(ClaimTy
                                     <input type="hidden" name="eventId" value="@Model.Id" />
                                     <input type="hidden" name="userId" value="@reg.UserId" />
                                     <button type="submit" class="btn btn-sm btn-outline-danger"
-                                    >Obriši</button>
+                                    >Delete</button>
                                 </form>
                             }
                         </li>
@@ -63,7 +63,7 @@ var currentUserId = SignInManager.IsSignedIn(User) ? User.FindFirstValue(ClaimTy
             }
             else
             {
-                <p class="mb-3">Nema prijavljenih korisnika za ovaj događaj.</p>
+                <p class="mb-3">There are no registered users for this event.</p>
             }
 
             @if (SignInManager.IsSignedIn(User))
@@ -75,7 +75,7 @@ var currentUserId = SignInManager.IsSignedIn(User) ? User.FindFirstValue(ClaimTy
                         <form asp-controller="Registration" asp-action="Register" method="post" class="d-inline">
                             @Html.AntiForgeryToken()
                             <input type="hidden" name="eventId" value="@Model.Id" />
-                            <button type="submit" class="btn text-white" style="background-color:#690B22; border-color:#690B22;">Prijavi se</button>
+                            <button type="submit" class="btn text-white" style="background-color:#690B22; border-color:#690B22;">Register</button>
                         </form>
                     }
                     else
@@ -83,7 +83,7 @@ var currentUserId = SignInManager.IsSignedIn(User) ? User.FindFirstValue(ClaimTy
                         <form asp-controller="Registration" asp-action="Unregister" method="post" class="d-inline">
                             @Html.AntiForgeryToken()
                             <input type="hidden" name="eventId" value="@Model.Id" />
-                            <button type="submit" class="btn text-white" style="background-color:#1B4D3E; border-color:#1B4D3E;">Odjavi se</button>
+                            <button type="submit" class="btn text-white" style="background-color:#1B4D3E; border-color:#1B4D3E;">Cancel Registration</button>
                         </form>
                     }
                 </div>
@@ -92,13 +92,13 @@ var currentUserId = SignInManager.IsSignedIn(User) ? User.FindFirstValue(ClaimTy
             <hr />
 
           
-            <h5 style="color:#1B4D3E;">Komentari</h5>
+            <h5 style="color:#1B4D3E;">Comments</h5>
             @if (SignInManager.IsSignedIn(User))
             {
                 <form asp-controller="Comment" asp-action="Create" method="post" class="mb-3">
                     <input type="hidden" name="eventId" value="@Model.Id" />
                     <textarea name="content" class="form-control mb-2" required></textarea>
-                    <button type="submit" class="btn text-white" style="background-color:#690B22; border-color:#690B22;">Dodaj komentar</button>
+                    <button type="submit" class="btn text-white" style="background-color:#690B22; border-color:#690B22;">Add Comment</button>
                 </form>
             }
 
@@ -116,7 +116,7 @@ var currentUserId = SignInManager.IsSignedIn(User) ? User.FindFirstValue(ClaimTy
                             <form asp-controller="Comment" asp-action="DeleteConfirmed" method="post" class="ms-2">
                                 <input type="hidden" name="id" value="@comment.Id" />
                                 @Html.AntiForgeryToken()
-                                <button type="submit" class="btn btn-sm btn-outline-danger">Obriši</button>
+                                <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
                             </form>
                         }
                     </li>
@@ -124,7 +124,7 @@ var currentUserId = SignInManager.IsSignedIn(User) ? User.FindFirstValue(ClaimTy
             </ul>
 
            
-            <h5 style="color:#1B4D3E;">Oceni ovaj događaj</h5>
+            <h5 style="color:#1B4D3E;">Rate This Event</h5>
             @if (SignInManager.IsSignedIn(User))
             {
                 <form asp-controller="Rating" asp-action="Create" method="post" class="mb-3">
@@ -136,7 +136,7 @@ var currentUserId = SignInManager.IsSignedIn(User) ? User.FindFirstValue(ClaimTy
                         <option value="4">4</option>
                         <option value="5">5</option>
                     </select>
-                    <button type="submit" class="btn text-white" style="background-color:#690B22; border-color:#690B22;">Potvrdi ocenu</button>
+                    <button type="submit" class="btn text-white" style="background-color:#690B22; border-color:#690B22;">Submit Rating</button>
                 </form>
             }
         </div>

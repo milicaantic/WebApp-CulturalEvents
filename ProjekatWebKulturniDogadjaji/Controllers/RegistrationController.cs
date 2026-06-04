@@ -38,7 +38,7 @@ namespace ProjekatWebKulturniDogadjaji.Controllers
                 .FirstOrDefaultAsync(r => r.EventId == eventId && r.UserId == user.Id);
             if (already != null)
             {
-                TempData["Info"] = "Već ste prijavljeni za ovaj događaj.";
+                TempData["Info"] = "You are already registered for this event.";
                 return RedirectToAction("Details", "Event", new { id = eventId });
             }
 
@@ -51,7 +51,7 @@ namespace ProjekatWebKulturniDogadjaji.Controllers
             _context.EventRegistrations.Add(reg);
             await _context.SaveChangesAsync();
 
-            TempData["Success"] = "Uspešno ste prijavljeni.";
+            TempData["Success"] = "You have successfully registered.";
             return RedirectToAction("Details", "Event", new { id = eventId });
         }
 
@@ -71,7 +71,7 @@ namespace ProjekatWebKulturniDogadjaji.Controllers
                 await _context.SaveChangesAsync();
             }
 
-            TempData["Success"] = "Uspešno ste otkazali prijavu.";
+            TempData["Success"] = "Your registration has been successfully canceled.";
             return RedirectToAction("Details", "Event", new { id = eventId });
         }
         [HttpPost]
@@ -86,11 +86,11 @@ namespace ProjekatWebKulturniDogadjaji.Controllers
             {
                 _context.EventRegistrations.Remove(registration);
                 await _context.SaveChangesAsync();
-                TempData["Success"] = "Korisnik je uklonjen sa događaja.";
+                TempData["Success"] = "The user has been removed from the event.";
             }
             else
             {
-                TempData["Error"] = "Korisnik nije pronađen.";
+                TempData["Error"] = "User not found.";
             }
 
             return RedirectToAction("Details", "Event", new { id = eventId });

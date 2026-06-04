@@ -84,7 +84,7 @@ using (var scope = app.Services.CreateScope())
         var result = await userManager.CreateAsync(adminUser, adminPassword); 
         if (!result.Succeeded)
         {
-            throw new Exception("Ne mogu da kreiram admin korisnika: " + string.Join(", ", result.Errors.Select(e => e.Description)));
+            throw new Exception("Unable to create admin user: " + string.Join(", ", result.Errors.Select(e => e.Description)));
         }
     }
     else

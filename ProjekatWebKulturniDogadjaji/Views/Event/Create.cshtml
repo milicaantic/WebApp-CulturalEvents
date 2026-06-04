@@ -6,40 +6,40 @@
 <div class="container py-4">
     <div class="card shadow-sm">
         <div class="card-body">
-            <h3 class="mb-3" style="color:#1B4D3E;">Kreiraj događaj</h3>
+            <h3 class="mb-3" style="color:#1B4D3E;">Create Event</h3>
 
             <form asp-action="Create" method="post">
                 <div class="mb-3">
-                    <label asp-for="Title" class="form-label" style="color:#1B4D3E;">Naslov</label>
+                    <label asp-for="Title" class="form-label" style="color:#1B4D3E;">Title</label>
                     <input asp-for="Title" class="form-control" />
                     <span asp-validation-for="Title" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
-                    <label asp-for="Description" class="form-label" style="color:#1B4D3E;">Opis</label>
+                    <label asp-for="Description" class="form-label" style="color:#1B4D3E;">Description</label>
                     <textarea asp-for="Description" class="form-control" rows="4"></textarea>
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
 
                 <div class="row g-3">
                     <div class="col-md-6">
-                        <label asp-for="Location" class="form-label" style="color:#1B4D3E;">Lokacija</label>
+                        <label asp-for="Location" class="form-label" style="color:#1B4D3E;">Location</label>
                         <input asp-for="Location" class="form-control" />
                         <span asp-validation-for="Location" class="text-danger"></span>
                     </div>
 
                     <div class="col-md-6">
-                        <label asp-for="StartDate" class="form-label" style="color:#1B4D3E;">Datum</label>
+                        <label asp-for="StartDate" class="form-label" style="color:#1B4D3E;">Date</label>
                         <input asp-for="StartDate" class="form-control" type="datetime-local" />
                         <span asp-validation-for="StartDate" class="text-danger"></span>
                     </div>
                 </div>
 
                 <div class="mb-3 mt-3">
-                    <label asp-for="CategoryId" class="form-label" style="color:#1B4D3E;">Kategorija</label>
+                    <label asp-for="CategoryId" class="form-label" style="color:#1B4D3E;">Category</label>
                     @Html.DropDownListFor(model => model.CategoryId,
                              ViewData["Categories"] as SelectList,
-                             "-- Izaberite kategoriju --",
+                             "-- Select a category --",
                              new { @class = "form-select" })
                     <span asp-validation-for="CategoryId" class="text-danger"></span>
                 </div>
@@ -47,11 +47,11 @@
 
                     <div class="d-flex gap-2">
                         <button type="submit" class="btn btn-lg text-white" style="background-color:#1B4D3E; border-color:#1B4D3E;">
-                            Kreiraj
+                            Create
                         </button>
 
                         <a asp-action="Index" class="btn btn-lg text-white" style="background-color:#690B22; border-color:#690B22;">
-                            Otkaži
+                            Cancel
                         </a>
                     </div>
 

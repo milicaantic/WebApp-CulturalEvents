@@ -18,7 +18,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] Kulturni događaji</title>
+    <title>@ViewData["Title"] Cultural Events</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
@@ -27,7 +27,7 @@
     <header class="sticky-top">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Kulturni događaji</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Cultural Events</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
                         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -40,7 +40,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark p-2 rounded border-start-0" asp-area="" asp-controller="Home" asp-action="Index"
                                onmouseover="this.style.backgroundColor='#F1E3D3';" onmouseout="this.style.backgroundColor='transparent';">
-                                Početna
+                                Home
                             </a>
                         </li>
                         @if (SignInManager.IsSignedIn(User))
@@ -49,7 +49,7 @@
                             <li class="nav-item border-start">
                                 <a class="nav-link text-dark p-2 rounded" asp-controller="Event" asp-action="MyEvents"
                                    onmouseover="this.style.backgroundColor='#F1E3D3';" onmouseout="this.style.backgroundColor='transparent';">
-                                    Moji događaji
+                                    My Events
                                 </a>
                             </li>
 
@@ -62,13 +62,13 @@
                                 <li class="nav-item border-start">
                                     <a class="nav-link text-dark p-2 rounded" asp-controller="Category" asp-action="Index"
                                        onmouseover="this.style.backgroundColor='#F1E3D3';" onmouseout="this.style.backgroundColor='transparent';">
-                                         Kategorije
+                                         Categories
                                     </a>
                                 </li>
                                 <li class="nav-item border-start">
                                     <a class="nav-link text-dark p-2 rounded" asp-controller="Event" asp-action="Pending"
                                        onmouseover="this.style.backgroundColor='#F1E3D3';" onmouseout="this.style.backgroundColor='transparent';">
-                                        Odobravanje događaja
+                                        Event Approval
                                     </a>
                                 </li>
                             }
@@ -83,7 +83,7 @@
                                     <button type="submit" class="nav-link btn btn-link text-dark p-2 rounded"
                                             style="text-decoration:none;"
                                             onmouseover="this.style.backgroundColor='#F1E3D3';" onmouseout="this.style.backgroundColor='transparent';">
-                                        @displayName - Odjavi se
+                                        @displayName - Log out
                                     </button>
                                 </form>
                             </li>
@@ -93,13 +93,13 @@
                             <li class="nav-item border-start">
                                 <a class="nav-link text-dark p-2 rounded" asp-area="Identity" asp-page="/Account/Register"
                                    onmouseover="this.style.backgroundColor='#F1E3D3';" onmouseout="this.style.backgroundColor='transparent';">
-                                    Registracija
+                                    Register
                                 </a>
                             </li>
                             <li class="nav-item border-start">
                                 <a class="nav-link text-dark p-2 rounded" asp-area="Identity" asp-page="/Account/Login"
                                    onmouseover="this.style.backgroundColor='#F1E3D3';" onmouseout="this.style.backgroundColor='transparent';">
-                                    Prijavljivanje
+                                    Log in
                                 </a>
                             </li>
                         }
@@ -152,7 +152,7 @@
 
     <footer class="border-top footer text-muted mt-auto bg-light">
         <div class="container">
-            &copy; 2025 - Kulturni dogadjaji
+            &copy; 2025 - Cultural Events
         </div>
     </footer>
 

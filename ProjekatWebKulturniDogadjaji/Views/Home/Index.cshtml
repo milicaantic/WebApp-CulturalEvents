@@ -4,10 +4,10 @@
 
 <div class="d-flex flex-column align-items-center justify-content-center vh-100  pt-5" style=" background-color: rgba(248, 249, 250, 0.7);">
     <div class="text-center bg-white border rounded-4 shadow p-5" style="max-width: 700px;">
-        <h1 class="mb-4 text-dark fw-bold">Aplikacija kulturnih događaja</h1>
+        <h1 class="mb-4 text-dark fw-bold">Cultural Events App</h1>
         <p class="text-secondary mb-4 fs-5">
-            Aplikacija omogućava korisnicima da kreiraju, menjaju i učestvuju u različitim kulturnim događajima,
-            ostavljaju komentare i ocenjuju ih. Administratori uređuju sadržaj i upravljaju sistemom.
+            The app allows users to create, edit, and participate in various cultural events,
+            leave comments, and rate them. Administrators manage content and the system.
         </p>
 
         <div class="d-flex justify-content-center gap-3 flex-wrap mb-4">
@@ -15,20 +15,20 @@
             {
                 <a class="btn btn-lg text-white"
                    style="background-color: #690B22;"
-                   asp-controller="Event" asp-action="PublicIndex">Pogledaj događaje</a>
+                   asp-controller="Event" asp-action="PublicIndex">View Events</a>
 
                 @if (User.IsInRole("Admin"))
                 {
                     <a class="btn btn-lg"
                        style="background-color: #F1E3D3; color: #690B22;"
-                       asp-controller="Category" asp-action="Index">Pogledaj kategorije</a>
+                       asp-controller="Category" asp-action="Index">View Categories</a>
                 }
             }
             else
             {
                 <a class="btn btn-lg text-white"
                    style="background-color: #690B22;"
-                   asp-controller="Event" asp-action="PublicIndex">Pogledaj događaje</a>
+                   asp-controller="Event" asp-action="PublicIndex">View Events</a>
             }
         </div>
     </div>

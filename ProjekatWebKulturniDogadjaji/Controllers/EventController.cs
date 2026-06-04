@@ -79,7 +79,7 @@ namespace ProjekatWebKulturniDogadjaji.Controllers
 
             if (!categories.Any())
             {
-                TempData["Error"] = "Trenutno nema odobrenih kategorija. Kreiranje događaja nije moguće.  Čeka se da admin odobri kategorije.";
+                TempData["Error"] = "There are currently no approved categories. Event creation is not possible until an admin approves categories.";
                 return RedirectToAction("Index");
             }
 
@@ -98,7 +98,7 @@ namespace ProjekatWebKulturniDogadjaji.Controllers
 
             if (!categories.Any())
             {
-                TempData["Error"] = "Trenutno nema odobrenih kategorija. Kreiranje događaja nije moguće. Čeka se da admin odobri kategorije.";
+                TempData["Error"] = "There are currently no approved categories. Event creation is not possible until an admin approves categories.";
                 return RedirectToAction("Index");
             }
 
@@ -116,7 +116,7 @@ namespace ProjekatWebKulturniDogadjaji.Controllers
             _context.Add(evt);
             await _context.SaveChangesAsync();
 
-            TempData["Success"] = "Događaj je uspešno kreiran!";
+            TempData["Success"] = "The event has been successfully created!";
             return RedirectToAction("MyEvents");
         }
 
@@ -188,7 +188,7 @@ namespace ProjekatWebKulturniDogadjaji.Controllers
             _context.Update(existing);
             await _context.SaveChangesAsync();
 
-            TempData["Success"] = "Događaj je uspešno izmenjen.";
+            TempData["Success"] = "The event has been successfully updated.";
             return RedirectToAction(nameof(PublicIndex));
         }
 
@@ -213,7 +213,7 @@ namespace ProjekatWebKulturniDogadjaji.Controllers
             {
                 _context.Events.Remove(ev);
                 await _context.SaveChangesAsync();
-                TempData["Success"] = "Događaj je uspešno obrisan.";
+                TempData["Success"] = "The event has been successfully deleted.";
             }
             return RedirectToAction(nameof(PublicIndex));
         }
@@ -241,7 +241,7 @@ namespace ProjekatWebKulturniDogadjaji.Controllers
 
             if (!ev.Category.IsApproved)
             {
-                TempData["Error"] = $"Ne možete odobriti događaj '{ev.Title}' jer njegova kategorija '{ev.Category.Name}' nije odobrena.";
+                TempData["Error"] = $"You cannot approve the event '{ev.Title}' because its category '{ev.Category.Name}' is not approved.";
                 return RedirectToAction(nameof(Pending));
             }
 
@@ -249,7 +249,7 @@ namespace ProjekatWebKulturniDogadjaji.Controllers
             _context.Update(ev);
             await _context.SaveChangesAsync();
 
-            TempData["Success"] = $"Događaj '{ev.Title}' je uspešno odobren.";
+            TempData["Success"] = $"The event '{ev.Title}' has been successfully approved.";
             return RedirectToAction(nameof(Pending));
         }
 

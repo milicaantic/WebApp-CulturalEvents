@@ -4,10 +4,10 @@
 
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h3 class="mb-4" style="color:#1B4D3E;">Moji događaji</h3>
+        <h3 class="mb-4" style="color:#1B4D3E;">My Events</h3>
         <a asp-controller="Event" asp-action="Create" class="btn btn-lg text-white btn-create"
            style="background-color:#690B22; border-color:#690B22;">
-           + Kreiraj novi događaj
+           + Create New Event
         </a>
     </div>
 
@@ -17,11 +17,11 @@
                 <table class="table table-hover mb-0 align-middle">
                     <thead class="table-light">
                         <tr>
-                            <th>Naslov</th>
-                            <th>Datum</th>
-                            <th>Kategorija</th>
+                            <th>Title</th>
+                            <th>Date</th>
+                            <th>Category</th>
                             <th>Status</th>
-                            <th>Akcija</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -34,22 +34,22 @@
                                 <td>
                                     @if (e.IsApproved)
                                     {
-                                        <span class="badge" style="background-color:#1B4D3E; color:#F1E3D3;">Odobreno</span>
+                                        <span class="badge" style="background-color:#1B4D3E; color:#F1E3D3;">Approved</span>
                                     }
                                     else
                                     {
-                                        <span class="badge" style="background-color:#F1E3D3; color:#690B22;">Na čekanju</span>
+                                        <span class="badge" style="background-color:#F1E3D3; color:#690B22;">Pending</span>
                                     }
                                 </td>
                                 <td>
                                     <div class="d-flex gap-2">
                                         <a asp-action="Details" asp-route-id="@e.Id" class="btn btn-sm"
-                                           style="border:1px solid #1B4D3E; color:#1B4D3E;">Detalji</a>
+                                           style="border:1px solid #1B4D3E; color:#1B4D3E;">Details</a>
 
                                         <a asp-action="Edit" asp-route-id="@e.Id" class="btn btn-sm"
-                                           style="background-color: #F1E3D3; color: #690B22; border-color:#F1E3D3;">Izmeni</a>
+                                           style="background-color: #F1E3D3; color: #690B22; border-color:#F1E3D3;">Edit</a>
                                         <a asp-action="Delete" asp-route-id="@e.Id" class="btn btn-sm"
-                                           style="border:1px solid #690B22; color:#690B22;">Obriši</a>
+                                           style="border:1px solid #690B22; color:#690B22;">Delete</a>
                                     </div>
                                 </td>
                             </tr>

@@ -7,14 +7,14 @@
 
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2 class="mb-4" style="color:#1B4D3E;">Kulturni dogadjaji</h2>
+        <h2 class="mb-4" style="color:#1B4D3E;">Cultural Events</h2>
 
         @if (SignInManager.IsSignedIn(User))
         {
             <a asp-controller="Event" asp-action="Create"
                class="btn btn-lg text-white"
                style="background-color:#690B22; border-color:#690B22;">
-                + Kreiraj novi događaj
+                + Create New Event
             </a>
         }
     </div>
@@ -27,9 +27,9 @@
     }   
     <form asp-action="PublicIndex" method="get" class="row g-2 mb-4">
         <div class="col-md-3">
-            <label for="categoryId" class="form-label">Kategorija</label>
+            <label for="categoryId" class="form-label">Category</label>
             <select name="categoryId" class="form-select">
-                <option value="">Sve kategorije</option>
+                <option value="">All categories</option>
                 @foreach (var category in categories)
                 {
                     if (ViewBag.SelectedCategoryId == category.Id.ToString())
@@ -46,17 +46,17 @@
         </div>
 
         <div class="col-md-3">
-            <label for="dateFrom" class="form-label">Od datuma</label>
+            <label for="dateFrom" class="form-label">From date</label>
             <input type="date" name="dateFrom" class="form-control" value="@dateFromValue" />
         </div>
 
         <div class="col-md-3">
-            <label for="dateTo" class="form-label">Do datuma</label>
+            <label for="dateTo" class="form-label">To date</label>
             <input type="date" name="dateTo" class="form-control" value="@dateToValue" />
         </div>
 
         <div class="col-md-3 d-flex align-items-end">
-            <button type="submit" class="btn w-100" style="background-color: #F1E3D3; color: #690B22;">Filtriraj</button>
+            <button type="submit" class="btn w-100" style="background-color: #F1E3D3; color: #690B22;">Filter</button>
         </div>
     </form>
 
@@ -66,15 +66,15 @@
                 <table class="table table-hover mb-0 align-middle">
                     <thead class="table-light">
                         <tr>
-                            <th class="fw-semibold">Naslov</th>
-                            <th class="fw-semibold">Kategorija</th>
-                            <th class="fw-semibold">Datum početka</th>
-                            <th class="fw-semibold">Lokacija</th>
-                            <th class="fw-semibold">Opis</th>
+                            <th class="fw-semibold">Title</th>
+                            <th class="fw-semibold">Category</th>
+                            <th class="fw-semibold">Start Date</th>
+                            <th class="fw-semibold">Location</th>
+                            <th class="fw-semibold">Description</th>
                             <th class="fw-semibold">Status</th>
                             @if (SignInManager.IsSignedIn(User))
                             {
-                                <th class="fw-semibold" style="width:220px;">Akcije</th>
+                                <th class="fw-semibold" style="width:220px;">Actions</th>
                             }
                         </tr>
                     </thead>
@@ -98,11 +98,11 @@
                                 <td style="min-width:120px;">
                                     @if (evt.IsApproved)
                                     {
-                                        <span class="badge" style="background-color:#1B4D3E; color:#F1E3D3;">Odobren</span>
+                                        <span class="badge" style="background-color:#1B4D3E; color:#F1E3D3;">Approved</span>
                                     }
                                     else
                                     {
-                                        <span class="badge" style="background-color:#F1E3D3; color:#690B22;">Čeka odobrenje</span>
+                                        <span class="badge" style="background-color:#F1E3D3; color:#690B22;">Pending Approval</span>
                                     }
                                 </td>
                                 @if (SignInManager.IsSignedIn(User))
@@ -110,17 +110,17 @@
                                     <td>
                                         <div class="d-flex gap-2">
                                             <a asp-action="Details" asp-route-id="@evt.Id" class="btn btn-sm"
-                                               style="border:1px solid #1B4D3E; color:#1B4D3E;">Detalji</a>
+                                               style="border:1px solid #1B4D3E; color:#1B4D3E;">Details</a>
 
                                             @if (isOwner || isAdmin)
                                             {
                                                 <a asp-action="Edit" asp-route-id="@evt.Id" class="btn btn-sm"
                                                    style="background-color: #F1E3D3; color: #690B22; border-color:#F1E3D3;">
-                                                    Izmeni
+                                                    Edit
                                                 </a>
                                                 <a asp-action="Delete" asp-route-id="@evt.Id" class="btn btn-sm"
                                                    style="border:1px solid #690B22; color:#690B22;">
-                                                    Obriši
+                                                    Delete
                                                 </a>
                                             }
                                         </div>
@@ -138,7 +138,7 @@
     {
         <div class="mt-3 text-center">
             <p class="text-muted mb-0">
-                Ako želite da vidite više detalja ili imate više mogućnosti, prijavite se!
+                Log in to view more details and access more options.
             </p>
         </div>
     }

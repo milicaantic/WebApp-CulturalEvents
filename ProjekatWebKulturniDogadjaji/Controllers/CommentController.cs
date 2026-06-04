@@ -31,7 +31,7 @@ namespace ProjekatWebKulturniDogadjaji.Controllers
 
             if (string.IsNullOrWhiteSpace(content))
             {
-                TempData["Error"] = "Komentar ne može biti prazan.";
+                TempData["Error"] = "The comment cannot be empty.";
                 return RedirectToAction("Details", "Event", new { id = eventId });
             }
 
@@ -46,7 +46,7 @@ namespace ProjekatWebKulturniDogadjaji.Controllers
                 _context.Comments.Add(comment);
                 await _context.SaveChangesAsync();
             }
-            TempData["Success"] = "Komentar je uspešno dodat!";
+            TempData["Success"] = "The comment has been successfully added!";
 
             return RedirectToAction("Details", "Event", new { id = eventId });
         }
@@ -82,7 +82,7 @@ namespace ProjekatWebKulturniDogadjaji.Controllers
 
             _context.Comments.Remove(comment);
             await _context.SaveChangesAsync();
-            TempData["Success"] = "Komentar je uspešno obrisan.";
+            TempData["Success"] = "The comment has been successfully deleted.";
             return RedirectToAction("Details", "Event", new { id = comment.EventId });
         }
     }

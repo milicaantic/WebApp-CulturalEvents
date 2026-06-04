@@ -55,7 +55,7 @@ namespace ProjekatWebKulturniDogadjaji.Controllers
                 _context.Update(ev);
                 await _context.SaveChangesAsync();
             }
-            TempData["Success"] = "Ocena je uspesno zabelezena";
+            TempData["Success"] = "The rating has been successfully recorded.";
             return RedirectToAction("Details", "Event", new { id = eventId });
         }
     }

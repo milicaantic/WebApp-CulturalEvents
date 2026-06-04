@@ -1,23 +1,23 @@
 ﻿@model ProjekatWebKulturniDogadjaji.Models.Category
 
-<h2 class="text-center mb-4" style="color:#1B4D3E;">Izmeni kategoriju</h2>
+<h2 class="text-center mb-4" style="color:#1B4D3E;">Edit Category</h2>
 
 <form asp-action="Edit" method="post" class="mx-auto" style="max-width: 500px;">
     <input type="hidden" asp-for="Id" />
 
     <div class="form-group mb-3">
-        <label asp-for="Name" class="form-label">Naziv</label>
+        <label asp-for="Name" class="form-label">Name</label>
         <input asp-for="Name" class="form-control shadow-sm" />
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
 
     <div class="form-check mb-3">
         <input asp-for="IsApproved" class="form-check-input" style="background-color:#1B4D3E; border-color:#690B22;" />
-        <label asp-for="IsApproved" class="form-check-label" style="color:#1B4D3E;">Odobravanje</label>
+        <label asp-for="IsApproved" class="form-check-label" style="color:#1B4D3E;">Approved</label>
     </div>
 
     <div class="text-center">
-        <button type="submit" class="btn text-white btn-lg" style="background-color:#690B22; border-color:#690B22;">Sačuvaj</button>
+        <button type="submit" class="btn text-white btn-lg" style="background-color:#690B22; border-color:#690B22;">Save</button>
     </div>
 </form>
 

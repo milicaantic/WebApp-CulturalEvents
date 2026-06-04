@@ -32,7 +32,7 @@ namespace ProjekatWebKulturniDogadjaji.Controllers
             {
                 _context.Add(category);
                 await _context.SaveChangesAsync();
-                TempData["Success"] = "Kategorija je uspešno kreirana.";
+                TempData["Success"] = "The category has been successfully created.";
                 return RedirectToAction(nameof(Index));
             }
             return View(category);
@@ -56,7 +56,7 @@ namespace ProjekatWebKulturniDogadjaji.Controllers
             {
                 _context.Update(category);
                 await _context.SaveChangesAsync();
-                TempData["Success"] = "Kategorija je uspešno izmenjena.";
+                TempData["Success"] = "The category has been successfully updated.";
                 return RedirectToAction(nameof(Index));
             }
             return View(category);
@@ -74,7 +74,7 @@ namespace ProjekatWebKulturniDogadjaji.Controllers
 
             if (category.Events != null && category.Events.Any())
             {
-                TempData["Error"] = "Ne možete obrisati kategoriju koja ima događaje.";
+                TempData["Error"] = "You cannot delete a category that has events.";
                 return RedirectToAction(nameof(Index));
             }
 
@@ -95,13 +95,13 @@ namespace ProjekatWebKulturniDogadjaji.Controllers
 
             if (category.Events != null && category.Events.Any())
             {
-                TempData["Error"] = "Ne možete obrisati kategoriju koja ima događaje.";
+                TempData["Error"] = "You cannot delete a category that has events.";
                 return RedirectToAction(nameof(Index));
             }
 
             _context.Categories.Remove(category);
             await _context.SaveChangesAsync();
-            TempData["Success"] = "Kategorija obrisana.";
+            TempData["Success"] = "The category has been deleted.";
             return RedirectToAction(nameof(Index));
         }
 
@@ -117,7 +117,7 @@ namespace ProjekatWebKulturniDogadjaji.Controllers
             category.IsApproved = true;
             await _context.SaveChangesAsync();
 
-            TempData["Success"] = $"Kategorija '{category.Name}' je odobrena.";
+            TempData["Success"] = $"The category '{category.Name}' has been approved.";
             return RedirectToAction(nameof(Index));
         }
     }

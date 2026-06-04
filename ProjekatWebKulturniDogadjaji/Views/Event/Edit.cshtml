@@ -6,41 +6,41 @@
 <div class="container py-4">
     <div class="card shadow-sm">
         <div class="card-body">
-            <h3 class="mb-3" style="color:#1B4D3E;">Izmeni događaj</h3>
+            <h3 class="mb-3" style="color:#1B4D3E;">Edit Event</h3>
 
             <form asp-action="Edit" method="post">
                 <input type="hidden" asp-for="Id" />
 
                 <div class="mb-3">
-                    <label asp-for="Title" class="form-label" style="color:#1B4D3E;">Naslov</label>
+                    <label asp-for="Title" class="form-label" style="color:#1B4D3E;">Title</label>
                     <input asp-for="Title" class="form-control" />
                     <span asp-validation-for="Title" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
-                    <label asp-for="Description" class="form-label" style="color:#1B4D3E;">Opis</label>
+                    <label asp-for="Description" class="form-label" style="color:#1B4D3E;">Description</label>
                     <textarea asp-for="Description" class="form-control" rows="4"></textarea>
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
 
                 <div class="row g-3">
                     <div class="col-md-6">
-                        <label asp-for="Location" class="form-label" style="color:#1B4D3E;">Lokacija</label>
+                        <label asp-for="Location" class="form-label" style="color:#1B4D3E;">Location</label>
                         <input asp-for="Location" class="form-control" />
                         <span asp-validation-for="Location" class="text-danger"></span>
                     </div>
 
                     <div class="col-md-6">
-                        <label asp-for="StartDate" class="form-label" style="color:#1B4D3E;">Datum</label>
+                        <label asp-for="StartDate" class="form-label" style="color:#1B4D3E;">Date</label>
                         <input asp-for="StartDate" type="datetime-local" class="form-control" />
                         <span asp-validation-for="StartDate" class="text-danger"></span>
                     </div>
                 </div>
 
                 <div class="mb-3 mt-3">
-                    <label asp-for="CategoryId" class="form-label" style="color:#1B4D3E;">Kategorija</label>
+                    <label asp-for="CategoryId" class="form-label" style="color:#1B4D3E;">Category</label>
                     <select asp-for="CategoryId" class="form-select" asp-items="@(ViewData["Categories"] as SelectList)">
-                        <option value="">-- Izaberite kategoriju --</option>
+                        <option value="">-- Select a category --</option>
                     </select>
                     <span asp-validation-for="CategoryId" class="text-danger"></span>
                 </div>
@@ -49,16 +49,16 @@
                 {
                     <div class="form-check mb-3">
                         <input asp-for="IsApproved" class="form-check-input" style="background-color:#1B4D3E; border-color:#690B22;" />
-                        <label asp-for="IsApproved" class="form-check-label" style="color:#1B4D3E;">Odobravanj</label>
+                        <label asp-for="IsApproved" class="form-check-label" style="color:#1B4D3E;">Approved</label>
                     </div>
                 }
 
                 <div class="d-flex gap-2">
                     <button type="submit" class="btn btn-lg text-white" style="background-color:#690B22; border-color:#690B22;">
-                        Sačuvaj
+                        Save
                     </button>
                     <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-lg" style="background-color:#F1E3D3; color:#1B4D3E; border-color:#F1E3D3;">
-                        Otkaži
+                        Cancel
                     </a>
                 </div>
             </form>
